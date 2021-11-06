@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account{% endblock %}
+
+{% block body %}
+
+    <section class="page-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-breadcrumb">
+                        <h2>My account<span>.</span></h2>
+                        <div class="account-greet mt-3">
+                            Welcome <span class="user-name">{{ app.user.firstname }} {{ app.user.lastname }} </span> in
+                            your account, <br/>
+                            In this place you can manage your personal information
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card bg-light">
+                        <div class="card-body text-center manage-account">
+                            <a href="{{ path("account_password") }}" class="card-text">Change my
+                                password</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card bg-light">
+                        <div class="card-body text-center manage-account">
+                            <a href="#" class="card-text">Add my addresses</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card bg-light">
+                        <div class="card-body text-center manage-account">
+                            <a href="#" class="card-text">My orders</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .account-greet {
+            font-size: large;
+        }
+
+        span.user-name {
+            color: #1e1e1e;
+            font-weight: 600;
+        }
+
+        .manage-account a:hover {
+            color: #1e1e1e;
+        }
+    </style>
+{% endblock %}
