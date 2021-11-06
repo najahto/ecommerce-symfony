@@ -30,17 +30,21 @@
                 <a href="{{ path('home') }}"><img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
             </div>
             <div class="header-right">
-
-                <img src="{{ asset('assets/img/icons/search.png') }}" alt="" class="search-trigger">
-                <img src="{{ asset('assets/img/icons/man.png') }}" alt="">
+                {% if app.user %}
+                    <a class="mr-3" href="{{ path('account') }}"><img src="{{ asset('assets/img/icons/man.png') }}" alt="account"></a>
+                {% endif %}
                 <a href="">
                     <img src="{{ asset('assets/img/icons/bag.png') }}" alt="">
-                    <span>2</span>
+                    <span>0</span>
                 </a>
             </div>
             <div class="user-access">
-                <a href="{{ path('register') }}">Register</a>
-                <a href="{{ path('login') }}" class="in">Sign in</a>
+                {% if app.user %}
+                    <a href="{{ path('logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ path('register') }}">Register</a>
+                    <a href="{{ path('login') }}" class="in">Sign in</a>
+                {% endif %}
             </div>
             <nav class="main-menu mobile-menu">
                 <ul>
@@ -117,7 +121,10 @@
     <div class="social-links-warp">
         <div class="container text-center pt-5">
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                All rights reserved | This template is made with <i class="icon-heart color-danger"
+                                                                    aria-hidden="true"></i> by <a
+                        href="https://colorlib.com" target="_blank">Colorlib</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
         </div>
     </div>
