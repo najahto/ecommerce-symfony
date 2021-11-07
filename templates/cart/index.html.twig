@@ -1,0 +1,180 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+    <!-- Page Add Section Begin -->
+    <section class="page-add cart-page-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-breadcrumb">
+                        <h2>Cart<span>.</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-page">
+            <div class="container">
+                {% if cart|length > 0 %}
+                    <div class="cart-table">
+
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="product-h">Product</th>
+                                <th>Price</th>
+                                <th class="quan">Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% set total = null %}
+                            {% for product in cart %}
+                                <tr>
+                                    <td class="product-col">
+                                        <img src="/images/products/{{ product.product.image }}" height="75px"
+                                             alt="product image">
+                                        <div class="p-title">
+                                            <h5>{{ product.product.name }}</h5>
+                                        </div>
+                                    </td>
+                                    <td class="price-col">€{{ product.product.formattedPrice }}</td>
+                                    {# <td class="quantity-col"> #}
+                                    {# <div class="pro-qty"> #}
+                                    {# <input type="text" value="{{ product.quantity }}"> #}
+                                    {# #}
+                                    {# </div> #}
+                                    {# </td> #}
+                                    {# <td> #}
+                                    {# <div class="quantity buttons_added"> #}
+                                    {# <input type="button" value="-" class="minus"> #}
+                                    {# <input type="number" step="1" min="1" max="" name="quantity" value="1" #}
+                                    {# title="Qty" class="input-text qty text" size="4" pattern="" #}
+                                    {# inputmode=""> #}
+                                    {# <input type="button" value="+" class="plus"> #}
+                                    {# </div> #}
+                                    {# </td> #}
+                                    <td class="quantity">
+                                        <a href="{{ path('cart.decrease',{id: product.product.id}) }}">
+                                            <button class="minus-btn" type="button" name="button"
+                                                    onclick="">
+                                                <span class="dec qtybtn">-</span>
+                                            </button>
+                                        </a>
+                                        <input type="text" name="name" value="{{ product.quantity }}">
+                                        <a href="{{ path('cart.add',{id: product.product.id}) }}">
+                                            <button class="plus-btn" type="button" name="button">
+                                                <span class="inc qtybtn">+</span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                    <td class="total">
+                                        €{{ ((product.product.price * product.quantity )/100) | number_format(2,'.','') }}
+                                    </td>
+                                    <td class="product-close"><a
+                                                href="{{ path('cart.remove',{id: product.product.id}) }}">x</a></td>
+                                </tr>
+                                {% set total = total + (product.product.price * product.quantity) %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cart-btn">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="pl-5">
+                                    <div class="cart-total">
+                                        <span>Number of product:</span>
+                                        <p>{{ cart|length }}</p>
+                                    </div>
+                                    <div class="cart-total">
+                                        <span>Total:</span>
+                                        <p>€{{ (( total )/100) | number_format(2,'.','') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 offset-lg-1 text-left text-lg-right">
+                                 <a href="{{ path('cart.clear') }}" class="site-btn clear-btn">Clear Cart</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-lg-12">
+                            <a href="#" class="site-btn  proceed-checkout btn-block text-center">Proceed to checkout</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <hr>
+                    <p><b>Your cart is empty</b></p>
+                {% endif %}
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .product-close a {
+            color: #1e1e1e;
+            text-decoration: none;
+        }
+
+        .cart-total span {
+            display: inline-block;
+            color: #838383;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+
+        .cart-total p {
+            display: inline-block;
+            color: #1e1e1e;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .quantity {
+            padding-top: 20px;
+            margin-right: 60px;
+        }
+
+        .quantity input {
+            -webkit-appearance: none;
+            border: none;
+            text-align: center;
+            width: 32px;
+            font-size: 16px;
+            color: #43484D;
+            font-weight: 300;
+        }
+
+        button[class*=btn] {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .minus-btn img {
+            margin-bottom: 3px;
+        }
+
+        .plus-btn img {
+            margin-top: 2px;
+        }
+
+        button:focus,
+        input:focus {
+            outline: 0;
+        }
+
+    </style>
+{% endblock %}

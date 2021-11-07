@@ -33,9 +33,11 @@
                 {% if app.user %}
                     <a class="mr-3" href="{{ path('account') }}"><img src="{{ asset('assets/img/icons/man.png') }}" alt="account"></a>
                 {% endif %}
-                <a href="">
+                <a href="{{ path('cart') }}">
                     <img src="{{ asset('assets/img/icons/bag.png') }}" alt="">
-                    <span>0</span>
+                    <span>
+                        {{ app.session.get('cart')|length }}
+                    </span>
                 </a>
             </div>
             <div class="user-access">

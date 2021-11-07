@@ -36,7 +36,7 @@
                             <div class="single-product-item">
                                 <figure>
                                     <a href="{{ path('product.show', {id: product.id, slug: product.slug } ) }}">
-                                        <img class="product-image" src="/images/products/{{ product.image }}"
+                                        <img class="shop-product-image" src="/images/products/{{ product.image }}"
                                              alt="product image"></a>
                                 </figure>
                                 <div class="product-text">
@@ -64,17 +64,9 @@
 
 {% block stylesheets %}
     <style>
-        .product-image {
-            width: 100%;
-            height: 40vh;
-            object-fit: cover;
-        }
-
         .form-control:focus {
             border-color: #1e1e1e;
             box-shadow: none;
         }
-
-
     </style>
 {% endblock %}

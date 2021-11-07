@@ -2045,12 +2045,24 @@ ol {
     line-height: 28px;
 }
 
+.shop-product-image {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+}
+
 .single-product-item a {
     color: #727272;
 }
 
 .single-product-item a:hover {
     color: #1e1e1e;
+}
+
+.site-btn.proceed-checkout {
+    color: white;
+    background: #28a745;
+    border: none;
 }
 
 /* ---------------------------------- Responsive Media Styles ---------------------------------*/
