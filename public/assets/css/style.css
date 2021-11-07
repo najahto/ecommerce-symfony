@@ -2045,12 +2045,12 @@ ol {
     line-height: 28px;
 }
 
-.map {
-    padding-top: 100px;
+.single-product-item a {
+    color: #727272;
 }
 
-.map iframe {
-    width: 100%;
+.single-product-item a:hover {
+    color: #1e1e1e;
 }
 
 /* ---------------------------------- Responsive Media Styles ---------------------------------*/
