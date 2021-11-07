@@ -16,28 +16,44 @@
         </div>
         <div class="container mt-5">
             <div class="row" id="product-list">
-                {% for product in products %}
-                    <div class="col-lg-3 col-sm-6 mix all ">
-                        <div class="single-product-item">
-                            <figure>
-                                <a href="{{ path('product.show', {id: product.id, slug: product.slug } ) }}">
-                                    <img class="product-image" src="/images/products/{{ product.image }}" alt="product image"></a>
-                            </figure>
-                            <div class="product-text">
-                                <h6>
-                                    <a href="{{ path('product.show', {id: product.id, slug: product.slug } ) }}">{{ product.name }}</a>
-                                </h6>
-                                <p>€{{ product.formattedPrice }}</p>
-                            </div>
+                <div class="col-lg-3 ">
+                    <h5>Filters</h5>
+                    {{ form_start(form) }}
+                    <div class="form-group mt-2">
+                        {{ form_row(form.name) }}
+                    </div>
+                    <div class="filter-checkbox">
+                        {{ form_row(form.categories) }}
+                        <div class="filter-btn mt-3">
+                            <button class="btn btn-dark btn-block">Filter</button>
                         </div>
                     </div>
-                {% endfor %}
+                    {{ form_end(form) }}
+                </div>
+                {% if products is not empty %}
+                    {% for product in products %}
+                        <div class="col-lg-3 col-sm-6 mix all ">
+                            <div class="single-product-item">
+                                <figure>
+                                    <a href="{{ path('product.show', {id: product.id, slug: product.slug } ) }}">
+                                        <img class="product-image" src="/images/products/{{ product.image }}"
+                                             alt="product image"></a>
+                                </figure>
+                                <div class="product-text">
+                                    <h6>
+                                        <a href="{{ path('product.show', {id: product.id, slug: product.slug } ) }}">{{ product.name }}</a>
+                                    </h6>
+                                    <p>€{{ product.formattedPrice }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-lg mt-4 ">
+                        <div class="alert alert-info p-2 text-center">No product found</div>
+                    </div>
+                {% endif %}
             </div>
-            {# display navigation #}
-{#            <div class="navigation d-flex align-items-center justify-content-center">#}
-{#                {{ knp_pagination_render(products) }}#}
-{#            </div>#}
-            {# display navigation #}
             <div class="navigation">
                 {{ knp_pagination_render(products) }}
             </div>
@@ -51,7 +67,14 @@
         .product-image {
             width: 100%;
             height: 40vh;
-            object-fit:cover;
+            object-fit: cover;
         }
+
+        .form-control:focus {
+            border-color: #1e1e1e;
+            box-shadow: none;
+        }
+
+
     </style>
 {% endblock %}

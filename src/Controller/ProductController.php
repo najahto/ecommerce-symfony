@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\ProductSearch;
+use App\Form\ProductSearchType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -33,15 +35,22 @@ class ProductController extends AbstractController
     /**
      * @Route("/products", name="products.index")
      */
-    public function index(PaginatorInterface $paginator, Request $request): Response
+    public function index(PaginatorInterface $paginator, Request $request, ProductRepository $repository): Response
     {
+        // Product filters
+        $search = new ProductSearch();
+        $form = $this->createForm(ProductSearchType::class, $search);
+        $form->handleRequest($request);
+
+        // Get products with pagination
         $products = $paginator->paginate(
-            $this->repository->findAll(),
+            $this->repository->findWithSearch($search),
             $request->query->getInt('page', 1),
             5
         );
         return $this->render('product/index.html.twig', [
-            'products' => $products
+            'products' => $products,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -65,4 +74,6 @@ class ProductController extends AbstractController
             'product' => $product
         ]);
     }
+
+
 }
