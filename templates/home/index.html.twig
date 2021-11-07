@@ -46,17 +46,22 @@
                 </div>
             </div>
             <div class="row" id="product-list">
-                <div class="col-lg-3 col-sm-6 mix all ">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="{{ asset('assets/img/products/product-img.jpg') }}" alt=""></a>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Yellow Maxi Dress</h6>
-                            <p>$25.90</p>
+                {% for product in latestProducts %}
+                    <div class="col-lg-3 col-sm-6 mix all ">
+                        <div class="single-product-item">
+                            <figure>
+                                <a href="{{ path('product.show', {id: product.id, slug: product.slug } ) }}">
+                                    <img class="product-image" src="/images/products/{{ product.image }}" alt="product image"></a>
+                            </figure>
+                            <div class="product-text">
+                                <h6>
+                                    <a href="{{ path('product.show', {id: product.id, slug: product.slug } ) }}">{{ product.name }}</a>
+                                </h6>
+                                <p>€{{ product.formattedPrice }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

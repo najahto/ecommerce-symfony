@@ -139,6 +139,11 @@ class Product
         return $this->price;
     }
 
+    public function getFormattedPrice(): string
+    {
+        return number_format($this->price / 100, 2, '.', '');
+    }
+
     public function setPrice(float $price): self
     {
         $this->price = $price;
