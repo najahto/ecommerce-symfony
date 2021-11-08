@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add address{% endblock %}
+
+{% block body %}
+
+    <section class="page-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-breadcrumb">
+                        <h2>Add address<span>.</span></h2>
+                        <a href="{{ path("account") }}">back to account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    {{ include('account/address/_form.html.twig', { button: 'Create'}) }}
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+

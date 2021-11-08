@@ -1,0 +1,41 @@
+<div class="custom-form">
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <h3>Your Information</h3>
+            <hr>
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.name) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.company) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.firstname) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.lastname) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.phone) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.city) }}
+        </div>
+        <div class="col-lg-12">
+            {{ form_row(form.address) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.postalCode) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.country) }}
+        </div>
+        {{ form_rest(form) }}
+        <div class="col-lg-12 text-right">
+            <button class="site-btn" type="submit">{{ button | default('Submit') }}</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>
