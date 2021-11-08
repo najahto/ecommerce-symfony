@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My addresses{% endblock %}
+
+{% block body %}
+
+    <section class="page-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-breadcrumb">
+                        <div class="d-flex justify-content-between">
+                            <h2>My addresses<span>.</span></h2>
+                            <div class="text-right">
+                                <a href="{{ path("account.address.new") }}" class="site-btn">Add address</a>
+                            </div>
+                        </div>
+                        <a href="{{ path("account") }}">back to account</a>
+                    </div>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success mt-3">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <div class="row">
+                {% if addresses|length > 0 %}
+                    {% for address in addresses %}
+                        <div class="col-lg-4">
+                            <div class="card" >
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ address.name }}</h5>
+                                    <p class="card-text">
+                                        {{ address.address }} <br/>
+                                        {{ address.postalCode }} - {{ address.city }} - {{ address.country }}
+                                    </p>
+                                    <a href="{{ path('account.address.edit',{id: address.id}) }}" class="card-link">Edit</a>
+
+                                    <form method="POST" action="{{ path('account.address.delete', {id: address.id}) }}"
+                                          style="display: inline-block">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ address.id) }}">
+                                        <a  href="javascript:;" onclick="parentNode.submit();" class="card-link">Delete</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-lg">
+                        <p class="text-center">
+                            You have not yet added an address in your customer account. to add one, please &nbsp;
+                            <a href="{{ path("account.address.new") }}">click here</a>
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card-body a:hover {
+            color: #1e1e1e;
+            text-decoration: none;
+        }
+        .card-body a:active {
+            color: gray;
+        }
+        .card-body a:visited {
+            color: #3142c7;
+        }
+    </style>
+{% endblock %}

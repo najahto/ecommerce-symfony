@@ -2065,6 +2065,17 @@ ol {
     border: none;
 }
 
+.custom-form select {
+    width: 100%;
+    font-size: 12px;
+    font-weight: 600;
+    color: #838383;
+    border: 0;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #E7EBED;
+    margin-bottom: 25px;
+}
+
 /* ---------------------------------- Responsive Media Styles ---------------------------------*/
 
 @media only screen and (min-width: 1500px) and (max-width: 1920px) {
