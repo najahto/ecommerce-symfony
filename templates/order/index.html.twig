@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}place order{% endblock %}
+
+{% block body %}
+
+    <section class="page-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-breadcrumb">
+                        <h2>Place my order<span>.</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    {% set formHTML %}
+                        {{ form_start(form,{action: path('order.recap') }) }}
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5>{{ form_label(form.addresses, 'Choose shipping address') }}</h5>
+                                <a href="{{ path('account.address.new') }}">Add new address</a>
+                            </div>
+                            {{ form_row(form.addresses) }}
+                        </div>
+                        <div>
+                            <h5>{{ form_label(form.carriers, 'Choose a shipping carrier') }}</h5>
+                            {{ form_row(form.carriers) }}
+                        </div>
+                        {{ form_end(form) }}
+                    {% endset %}
+                    {{ formHTML|replace({'[br]':'<br>'})|raw }}
+                </div>
+                <div class="col-lg-4">
+                    <h5>Recap of my order</h5>
+                    <div class="order-table">
+                        {% for key,product in cart %}
+                            <div class="row {% if key > 0 %} mt-3 {% endif %}">
+                                <div class="product-col m-2 d-flex justify-content-around align-items-center">
+                                    <img src="/images/products/{{ product.product.image }}" height="75px"
+                                         alt="product image">
+                                    <div class="p-titl ml-4">
+                                        <h5>{{ product.product.name }}</h5>
+                                    </div>
+                                    <div class="quantity ml-5">
+                                        x{{ product.quantity }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+
+    </style>
+{% endblock %}

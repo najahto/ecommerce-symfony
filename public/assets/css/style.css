@@ -100,7 +100,7 @@ a:hover,
 a:focus {
     text-decoration: none;
     outline: none;
-    color: #fff;
+    color: #3142c7;
 }
 
 ul,
@@ -2059,7 +2059,7 @@ ol {
     color: #1e1e1e;
 }
 
-.site-btn.proceed-checkout {
+.site-btn.validate-btn {
     color: white;
     background: #28a745;
     border: none;
