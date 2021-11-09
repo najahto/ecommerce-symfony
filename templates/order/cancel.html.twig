@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Payment error{% endblock %}
+
+{% block body %}
+
+    <section class="page-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-breadcrumb">
+                        <h2>Payment problem<span>.</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-5 validation-message">
+                <p>
+                    Hello <strong>{{ order.user.firstname }} {{ order.user.lastname }}</strong>,<br/>
+                    It seems that your payment has failed for your order n° <strong>{{ order.reference }}</strong><br/>
+                </p>
+                <a href="{{ path('order') }}">Try again</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .validation-message p {
+            font-size: 1.4rem;
+            color: #1e1e1e;
+        }
+    </style>
+{% endblock %}
+

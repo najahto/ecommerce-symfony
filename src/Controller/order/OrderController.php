@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\order;
 
 use App\Entity\Order;
 use App\Entity\OrderDetails;
@@ -73,9 +73,13 @@ class OrderController extends AbstractController
             $order->setDelivery($delivery_content);
             $order->setIsPaid(0);
 
+            $date = new \DateTime();
+            $reference = $date->format('dmY').'-'.uniqid();
+            $order->setReference($reference);
+
             $this->em->persist($order);
 
-            // save my products OrderDetails()
+            // save my products
             foreach ($cart->getAll() as $product) {
                 $orderDetails = new OrderDetails();
                 $orderDetails->setMyOrder($order);
@@ -91,7 +95,8 @@ class OrderController extends AbstractController
             return $this->render('order/add.html.twig', [
                 'cart' => $cart->getAll($cart),
                 'carrier' => $carriers,
-                'delivery' => $delivery_content
+                'delivery' => $delivery_content,
+                'reference' => $order->getReference()
             ]);
         }
         return $this->redirectToRoute('cart');

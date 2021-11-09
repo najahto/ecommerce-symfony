@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Order success{% endblock %}
+
+{% block body %}
+
+    <section class="page-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-breadcrumb">
+                        <h2>Order validation<span>.</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-5 validation-message">
+                <p>
+                    Hello <strong>{{ order.user.firstname }} {{ order.user.lastname }}</strong>,<br/>
+                    thank you for your order n° <strong>{{ order.reference }}</strong><br/>
+                    A confirmation has just been sent to your email <strong>{{ order.user.email }}</strong>
+                </p>
+                <hr>
+                <p>
+                    your order will be delivered by <strong>{{ order.carrierName }}</strong>, to the following address
+                    <br/>
+                    {{ order.delivery | raw }}
+                </p>
+                <hr>
+                To see your order go to your <a href="{{ path('account') }}">Account</a>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .validation-message p {
+            font-size: 1.4rem;
+            color: #1e1e1e;
+        }
+    </style>
+{% endblock %}
+
