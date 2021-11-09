@@ -31,6 +31,9 @@
                                         <button type="submit">{{ button | default('Register') }}</button>
                                     </div>
                                 </div>
+                                <div class="text-center mt-3">
+                                    Already have an account? <a href="{{ path('login') }}">Login here</a>
+                                </div>
                             </div>
                             {{ form_end(form) }}
                         </div>

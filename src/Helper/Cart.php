@@ -24,15 +24,17 @@ class Cart
         $this->em = $em;
     }
 
-    public function getAll($cart): array
+    public function getAll(): array
     {
         $cartItems = [];
-
-        if ($cart->get()) {
-            foreach ($cart->get() as $id => $quantity) {
+        $cart = $this->session->get('cart', []);
+        if (!empty($cart)) {
+            $product = null;
+            foreach ($cart as $id => $quantity) {
                 $product = $this->em->find(Product::class, $id);
                 if (!$product) {
                     $this->remove($id);
+                    continue;
                 }
                 $cartItems[] = [
                     'product' => $product,

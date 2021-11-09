@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order payment{% endblock %}
+
+{% block body %}
+
+    <section class="page-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-breadcrumb">
+                        <h2>My recap<span>.</span></h2>
+                        Verify your information before paying
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="mb-3">
+                        <h5>My shipping address</h5>
+                        <hr>
+                        {{ delivery | raw }}
+                    </div>
+                    <div>
+                        <h5>My carrier</h5>
+                        <hr>
+                        {{ carrier.name }}<br/>
+                        €{{ carrier.formattedPrice }}<br/>
+                        {{ carrier.description }}
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h5>My order</h5>
+                    <div class="order-table">
+                        {% set total = null %}
+                        {% for key,product in cart %}
+                            <div class="row {% if key > 0 %} mt-3 {% endif %}">
+                                <div class="product-col m-2 d-flex justify-content-around align-items-center">
+                                    <img src="/images/products/{{ product.product.image }}" height="75px"
+                                         alt="product image">
+                                    <div class="p-titl ml-4 mr-4">
+                                        <h5>{{ product.product.name }}</h5>
+                                        <div class="quantity">
+                                            x{{ product.quantity }}
+                                        </div>
+                                    </div>
+                                    <div class="cart-item justify-content-end m-0">
+                                        <p>
+                                            €{{ ((product.product.price * product.quantity )/100) | number_format(2,'.','') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% set total = total + (product.product.price * product.quantity) %}
+                        {% endfor %}
+                        <div class="mt-4">
+                            <div class="cart-item">
+                                <span>Sub total</span>
+                                <p>€{{ (( total )/100) | number_format(2,'.','') }}</p>
+                            </div>
+                            <div class="cart-item">
+                                <span>Shipping</span>
+                                <p>€{{ carrier.formattedPrice }}</p>
+                            </div>
+                            <div class="cart-total mt-0">
+                                <span>Total</span>
+                                {% set total = (( total /100) + carrier.price) | number_format(2,'.','') %}
+                                <p>€{{ total }}</p><br>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mt-4">
+                        <button class="site-btn validate-btn btn-block text-center">Pay €{{ total }}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}
