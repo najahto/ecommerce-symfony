@@ -39,7 +39,7 @@ class Carrier
 
     public function getFormattedPrice(): string
     {
-        return number_format($this->price, 2, '.', '');
+        return number_format($this->price/100, 2, '.', '');
     }
 
     public function getId(): ?int

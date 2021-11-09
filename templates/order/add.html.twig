@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Order payment{% endblock %}
+{% block title %}Order recap{% endblock %}
 
 {% block body %}
 
@@ -65,14 +65,17 @@
                             </div>
                             <div class="cart-total mt-0">
                                 <span>Total</span>
-                                {% set total = (( total /100) + carrier.price) | number_format(2,'.','') %}
+                                {% set total = (( total /100) + ( carrier.price /100)) | number_format(2,'.','') %}
                                 <p>€{{ total }}</p><br>
                             </div>
                         </div>
 
                     </div>
                     <div class="mt-4">
-                        <button class="site-btn validate-btn btn-block text-center">Pay €{{ total }}</button>
+                        <form action="{{ path('payment.create.session',{reference:reference}) }}" method="post">
+                            <button id="checkout-button" class="site-btn validate-btn btn-block text-center">Pay
+                                €{{ total }}</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -81,3 +84,4 @@
     </section>
 
 {% endblock %}
+
