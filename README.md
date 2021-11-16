@@ -19,5 +19,14 @@ I developed this project while learning Symfony framework.
 * [x] User Management
 
 ## Screenshots :
-<img align="center" src="./screenshots/home.png" />
+<img align="center" src="./screenshots/home.png" /><br/>
+<img align="center" src="./screenshots/FireShot Capture 006 - Out Products - 127.0.0.1.png" /><br/>
+<img align="center" src="./screenshots/product-details.png" /><br/>
+<img align="center" src="./screenshots/cart.png" /><br/>
+<img align="center" src="./screenshots/place order.png" /><br/>
+<img align="center" src="./screenshots/recap.png" /><br/>
+<img align="center" src="./screenshots/payment.png" /><br/>
+
+<img align="center" src="./admin_products.png" /><br/>
+
 
